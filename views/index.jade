@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Login
+  form(action='/' method='post')
+    div
+      label(for='username') Username:
+      input(type='text' id='userInput' name='username' placeholder='Username')
+    div
+      label(for='password') Password:
+      input(type='text' id='passInput' name='password' placeholder='Password')
+    div
+      input(type='submit' value='Log In')
+    div
+      a(href='/register') Register
