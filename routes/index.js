@@ -8,4 +8,11 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.post('/',
+  passport.authenticate('local', {
+    successRedirect: '/users',
+    failureRedirect: '/'
+  })
+);
+
 module.exports = router;

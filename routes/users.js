@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  if(req.isAuthenticated() == true){
+    res.json(req.isAuthenticated());
+  } else {
+    res.send('Not Authorized');
+  }
 });
 
 module.exports = router;
