@@ -27,7 +27,7 @@ var register = require('./routes/register');
 var app = express();
 
 app.use(session({
-  secret: 'secret',
+  secret: 'Sosecret',
   key: 'user',
   resave: true,
   saveUninitialized: false,

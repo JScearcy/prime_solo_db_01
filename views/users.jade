@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 Users page
+  button(id='refreshBtn' class='button') Refresh
+  .users
+    for user in users 
+      .user
+        ul
+          li Username: #{user.username}
+          li Name: #{user.firstname} #{user.lastname}
+          li Email: #{user.email}
+          
