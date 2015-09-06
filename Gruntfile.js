@@ -4,7 +4,8 @@ module.exports = function(grunt) {
      uglify: {
        my_target: {
          files: {
-           'public/javascripts/app.min.js': 'client/javascripts/app.js'
+           'public/javascripts/app.min.js': 'client/javascripts/app.js',
+           'public/javascripts/jquery.form.min.js': 'client/javascripts/jquery.form.js'
          }
        }
      },

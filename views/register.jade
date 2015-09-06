@@ -5,10 +5,10 @@ block content
   form(id="register" method='post')
     div
       label(for='username') Username:
-      input(type='text' id='username' name='username')
+      input(type='text' id='username' name='username' required)
     div
       label(for='password') Password:
-      input(type='password' id='password' name='password')
+      input(type='password' id='password' name='password' required)
     div
       label(for='firstname') First Name:
       input(type='text' id='firstname' name='firstname')
@@ -17,6 +17,6 @@ block content
       input(type='text' id='lastname' name='lastname')
     div
       label(for='email') Email:
-      input(type='email' id='email' name='email')
+      input(type='email' id='email' name='email' required)
     div
       input(type='submit' id='subBtn' value='Submit')

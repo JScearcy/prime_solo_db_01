@@ -1,13 +1,14 @@
 extends layout
 
 block content
-  h1 Users page
-  button(id='refreshBtn' class='button') Refresh
-  .users
+  header(class='header')
+    h1 Users page
+    button(id='refreshBtn' class='button') Refresh
+  body(class='users')
     for user in users 
       .user
-        ul
-          li Username: #{user.username}
-          li Name: #{user.firstname} #{user.lastname}
-          li Email: #{user.email}
+        ul(class="list-group")
+          li(class="list-group-item") Username: #{user.username}
+          li(class="list-group-item") Name: #{user.firstname} #{user.lastname}
+          li(class="list-group-item") Email: #{user.email}
           

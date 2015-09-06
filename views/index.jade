@@ -1,15 +1,75 @@
 extends layout
 
 block content
-  h1 Login
-  form(action='/' method='post')
-    div
-      label(for='username') Username:
-      input(type='text' id='userInput' name='username' placeholder='Username')
-    div
-      label(for='password') Password:
-      input(type='password' id='passInput' name='password' placeholder='Password')
-    div
-      input(type='submit' value='Log In')
-    div
-      a(href='/register') Register
+  .content
+    form(id='LoginForm' class='form-signin' action='/' method='post')
+      h1(class='form-signin-heading') Login
+      if failmessage && failmessage.length > 0
+        .loginfail
+          div(class="alert alert-error")
+            a(class="close" data-dismiss="alert" href="#")× 
+            p Incorrect Username or Password!
+      div
+        label(for='username' class='sr-only') Username:
+        input(type='text' class='form-control' id='userInput' name='username' placeholder='Username')
+      div
+        label(for='password' class='sr-only') Password:
+        input(type='password' class='form-control' id='passInput' name='password' placeholder='Password')
+      div
+        input(type='submit' class='btn btn-lg btn-primary btn-block' value='Log In')
+      div
+        button(type='button' id='regModalBtn' class='btn btn-lg btn-primary btn-block' data-toggle='modal' data-target='#Register' data-trigger='hover') Register
+      
+    div(id='Register' class='modal fade' role='dialog')
+      div(class='modal-dialog')
+        div(class='modal-content')
+          div(class='modal-header')
+            h1 Register Here
+          div(class='modal-body')  
+            div(class="panel panel-default")
+              div(class="panel-heading")
+                h3(class="panel-title") Please sign up for UsersList
+              div(class="panel-body")
+                form(role="form" id='register')
+                  div(class="row")
+                    div(class="col-xs-6 col-sm-6 col-md-6")
+                      div(class="form-group")
+                        input(type="text" name="firstname" id="firstname" class="form-control input-sm" placeholder="First Name")
+                    div(class="col-xs-6 col-sm-6 col-md-6")
+                      div(class="form-group")
+                        input(type="text" name="lastname" id="lastname" class="form-control input-sm" placeholder="Last Name")
+                  div(class="form-group")
+                    input(type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" required)
+                  div(class="form-group usernameInput")
+                    input(type='text' name='username' id='username' class='form-control input-sm' placeholder="Username" required)
+                  div(class="row")
+                    div(class="col-xs-6 col-sm-6 col-md-6")
+                      div(class="form-group")
+                        input(type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" required)
+                    div(class="col-xs-6 col-sm-6 col-md-6")
+                      div(class="form-group")
+                        input(type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password" required)
+                  div(class="matchPassword" class='hidden')
+                    div(class="alert alert-error")
+                      a(class="close" data-dismiss="alert" href="#")× 
+                      p Your password doesn't match.
+                  input(type="submit" id='subBtn' value="Register" class="btn btn-info btn-block")
+          //- form(id="register" method='post')
+          //-   .usernameInput
+          //-     label(for='username') Username:
+          //-     input(type='text' id='username' name='username' required)
+          //-   div
+          //-     label(for='password') Password:
+          //-     input(type='password' id='password' name='password' required)
+          //-   div
+          //-     label(for='firstname') First Name:
+          //-     input(type='text' id='firstname' name='firstname')
+          //-   div
+          //-     label(for='lastname') Last Name:
+          //-     input(type='text' id='lastname' name='lastname')
+          //-   div
+          //-   label(for='email') Email:
+          //-   input(type='email' id='email' name='email' required)
+          //-   input(type='submit' id='subBtn' value='Submit')
+        //- div(class='modal-footer')
+        //-   button(id='CloseBtn' type='button' data-dismiss='modal') Close

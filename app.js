@@ -8,7 +8,8 @@ var express = require('express'),
     session = require('express-session'),
     localStrategy = require('passport-local').Strategy,
     mongoose = require('mongoose'),
-    User = require('./models/user');
+    User = require('./models/user'),
+    flash = require('connect-flash');
 
 
 var mongoURI = 'mongodb://localhost:27017/prime_example_passport';
@@ -33,9 +34,10 @@ app.use(session({
   saveUninitialized: false,
   cookie: {maxage: 60000, secure: false}
 }));
-
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 passport.use('local', new localStrategy({
        passReqToCallback : true,
@@ -47,13 +49,12 @@ function(req, username, password, done){
        if (!user)
            return done(null, false, {message: 'Incorrect username and password.'});
 
-       // test a matching password
        user.verifyPassword(password, function(err, isMatch) {
            if (err) throw err;
            if(isMatch)
                return done(null, user);
            else
-               return done(null, false, { message: 'Incorrect username and password.' });
+               return done(null, false, { message: 'Incorrect username and password.'});
        });
    });
 }));

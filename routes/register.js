@@ -9,12 +9,15 @@ router.get('/', function(req, res, next){
 })
 
 router.post('/', function(req, res, next){
-  console.log('Here!');
   User.create(req.body, function(err, post){
     if (err) {
-       next(err)
+      if(err.code == 11000){
+        res.json('Already exists');
+      } else{
+          next(err);
+        }
      } else {
-       res.redirect('/');
+       res.json(req.body.username);
      }
   })
 });
