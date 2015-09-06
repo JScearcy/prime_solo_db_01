@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  //pertains to users page controls
   function requestUsers(){
     $.ajax({
       method: 'GET',
@@ -9,13 +10,24 @@ $(document).ready(function(){
       console.log(err)
     }).always(function(){})
   };
-  $('body').on('click', function(){
-    $('#regModalBtn').blur();
-  })
+
   $('#refreshBtn').on('click', function(){
     requestUsers();
   });
 
+  $('#logOut').on('click', function(){
+    $.ajax({
+      method: 'GET',
+      url: '/users/logout'
+    }).done(function(data){
+      console.log(data);
+      var loginSwitch = document.open('text/html', 'replace');
+      loginSwitch.write(data);
+      loginSwitch.close();
+    })
+  });
+
+  //pertains to register/login page control
   $('#register').submit(function(e){
     e.preventDefault();
     if($('#password').val() === $('#password_confirmation').val()){
