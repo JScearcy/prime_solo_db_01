@@ -10,11 +10,11 @@ $(document).ready(function(){
       console.log(err)
     }).always(function(){})
   };
-
+  //refresh the users display
   $('#refreshBtn').on('click', function(){
     requestUsers();
   });
-
+  //logout and display main login page
   $('#logOut').on('click', function(){
     $.ajax({
       method: 'GET',
@@ -28,6 +28,8 @@ $(document).ready(function(){
   });
 
   //pertains to register/login page control
+  //this listens for register button click and adds new user to database
+  //the server will send back if the user exists and that will flash on screen
   $('#register').submit(function(e){
     e.preventDefault();
     if($('#password').val() === $('#password_confirmation').val()){

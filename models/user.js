@@ -10,6 +10,7 @@ var UserSchema = new Schema({
   lastname: String,
   email: {type: String, required: true}
 });
+//before save hash password with some salt
 UserSchema.pre('save', function(next){
   var user = this;
   if(!user.isModified('password')){
