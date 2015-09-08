@@ -14,7 +14,6 @@ router.get('/', function(req, res, next){
 router.post('/', function(req, res, next){
   User.create(req.body, function(err, post){
     if (err) {
-      console.log(err.toJSON());
       if(err.code == 11000){
         res.json('Already exists');
       } else{
