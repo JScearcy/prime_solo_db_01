@@ -6,7 +6,7 @@ var User = require('../models/user')
 //this will display all users, their names, and email addresses
 router.get('/', function(req, res, next) {
   if(req.isAuthenticated() == true){
-    var thisUser = req.user.firstname;
+    var thisUser = req.user.firstname || 'Individual!';
     User.find({}, 'username firstname lastname email', function(err, users){
     res.render('users.jade', {users: users, thisUser: thisUser});
   });

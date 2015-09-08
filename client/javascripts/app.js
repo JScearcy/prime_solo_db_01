@@ -5,6 +5,21 @@ $(document).ready(function(){
       method: 'GET',
       url: '/users/refresh'
     }).done(function(data){
+      $users = $('.allusers');
+      $users.empty();
+      data.forEach(function(user, userInd) {
+        $userDiv = $('<div>').addClass('user');
+        $userUl = $('<ul>').addClass('list-group');
+        $userLiUser = $('<li>').addClass('list-group-item');
+        $userLiName = $('<li>').addClass('list-group-item');
+        $userLiEmail = $('<li>').addClass('list-group-item');
+        $userAEmail = $('<a>');
+        $userLiUser.text('Username: ' + user.username);
+        $userLiName.text('Name: ' + user.firstname + ' ' + user.lastname);
+        $userAEmail.attr({href: 'mailto:' + user.email}).text('Email ' + user.firstname);
+        $userDiv.append($userUl.append($userLiName).append($userLiUser).append($userLiEmail.append($userAEmail)));
+        $users.append($userDiv);
+      });
       console.log(data);
     }).fail(function(err){
       console.log(err)
