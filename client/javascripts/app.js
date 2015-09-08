@@ -20,7 +20,6 @@ $(document).ready(function(){
       method: 'GET',
       url: '/users/logout'
     }).done(function(data){
-      console.log(data);
       var loginSwitch = document.open('text/html', 'replace');
       loginSwitch.write(data);
       loginSwitch.close();
@@ -29,7 +28,7 @@ $(document).ready(function(){
 
   //pertains to register/login page control
   //this listens for register button click and adds new user to database
-  //the server will send back if the user exists and that will flash on screen
+  //the server will send back if the user already exists and that will flash on screen
   $('#register').submit(function(e){
     e.preventDefault();
     if($('#password').val() === $('#password_confirmation').val()){
@@ -50,7 +49,7 @@ $(document).ready(function(){
               $userInput.append($userExistsDiv.append($userExistsA).append($userExistsP));
             }
           } else {
-            $('.content').trigger('click');
+            $('#Register').modal('hide');
             $('#userInput').val(data);
             $('#LoginForm').prepend('<p>Registration Successful!');
           }

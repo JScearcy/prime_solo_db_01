@@ -3,6 +3,7 @@ extends layout
 block content
   header(class='header')
     h1 Users page
+    h2 Hello #{thisUser}
     button(id='refreshBtn' class='button') Refresh
     button(id='logOut' class='button') Log Out
   body(class='users')
@@ -11,5 +12,6 @@ block content
         ul(class="list-group")
           li(class="list-group-item") Username: #{user.username}
           li(class="list-group-item") Name: #{user.firstname} #{user.lastname}
-          li(class="list-group-item") Email: #{user.email}
+          li(class="list-group-item") 
+            a(href='mailto:#{user.email}') Email #{user.firstname}
           
