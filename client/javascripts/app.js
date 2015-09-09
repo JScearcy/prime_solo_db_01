@@ -1,11 +1,12 @@
 $(document).ready(function(){
+  $allUsers = $('.allusers');
   //pertains to users page controls
   function requestUsers(){
     $.ajax({
       method: 'GET',
       url: '/users/refresh'
     }).done(function(data){
-      $users = $('.allusers');
+      $users = $allUsers;
       $users.empty();
       data.forEach(function(user, userInd) {
         $userDiv = $('<div>').addClass('user');
@@ -74,4 +75,75 @@ $(document).ready(function(){
       $('.matchPassword').removeClass('hidden');
     }
   });
+  $allUsers.on('click', '#subBrews', function(e){
+    e.preventDefault();
+    var data = {
+      username: $('.brewnoteform').data('id'),
+      brew: $('#brew').val(),
+      brewnotes: $('#brewnotes').val()
+    };
+    $('#brew').val('');
+    $('#brewnotes').val('');
+    $.ajax({
+      method: 'POST',
+      url: '/users/post',
+      data: data
+    }).done(function(data){
+      var source = $("#NewBeerPost").html();
+      var template = Handlebars.compile(source);
+      $('.allposts').append(template(data));
+      console.log(data);
+    })
+  });
+  $allUsers.on('click', '#delPost', function(e){
+      var $post = $(this);
+      e.preventDefault();
+      var data = {
+        id: $($post).parent().parent().data('id'),
+      }
+      $.ajax({
+        method: 'DELETE',
+        url: '/users/deletepost',
+        data: data
+      }).done(function(err, data){
+        console.log(data);
+        $post.parent().parent().remove();
+      })
+  });
+  $allUsers.on('click', '#editPost', function(e){
+      e.preventDefault();
+      var $post = $(this).parent().parent();
+      var $beer = $('.beerpost');
+      var $notes = $('.brewnotespost');
+      var beer = $beer.data('brew');
+      var note = $notes.text();
+      var $beerLi = $('<li>');
+      var $editBeer = $('<input type="text" id="editedBrew">').val(beer);
+      var $postLi = $('<li>');
+      var $editPost = $('<textarea rows="3" cols="20" id="editedBrewNotes">').val(note);
+      $beer.remove();
+      $notes.remove();
+      $post.prepend($('<button id="subEdit" class="btn btn-primary">Submit Edit</button>')).prepend($postLi.append($editPost)).prepend($beerLi.append($editBeer));
+  });
+  $allUsers.on('click', '#subEdit', function(e) {
+    e.preventDefault();
+    $post = $(this).parent();
+    $brew = $('#editedBrew');
+    var data = {
+      id: $post.data('id'),
+      brew: $('#editedBrew').val(),
+      brewnotes: $('#editedBrewNotes').val(),
+    };
+    $.ajax({
+      method: 'PUT',
+      url: '/users/editpost',
+      data: data
+    }).done(function(data){
+      console.log(data);
+      $post.remove();
+      var source = $("#NewBeerPost").html();
+      var template = Handlebars.compile(source);
+      $('.allposts').append(template(data));
+    })
+  })
 });

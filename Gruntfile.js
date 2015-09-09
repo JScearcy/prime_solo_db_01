@@ -15,7 +15,8 @@ module.exports = function(grunt) {
            {expand: true, cwd: 'client', src: 'stylesheets/*', dest: 'public/', filter: 'isFile'},
            {expand: true, cwd: 'client/javascripts', src: 'jquery.min.js', dest: 'public/javascripts', filter: 'isFile'},
            {expand: true, cwd: 'node_modules/bootstrap/dist/js', src: 'bootstrap.min.js', dest: 'public/javascripts', filter: 'isFile'},
-           {expand: true, cwd: 'node_modules/bootstrap/dist/css', src: 'bootstrap.min.css', dest: 'public/stylesheets', filter: 'isFile'}
+           {expand: true, cwd: 'node_modules/bootstrap/dist/css', src: 'bootstrap.min.css', dest: 'public/stylesheets', filter: 'isFile'},
+           {expand: true, cwd: 'node_modules/handlebars/dist/', src: 'handlebars.min.js', dest: 'public/javascripts', filter: 'isFile'}
          ]
        }
      }

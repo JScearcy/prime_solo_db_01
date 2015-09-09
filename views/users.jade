@@ -9,10 +9,37 @@ block content
       button(id='logOut' class='button') Log Out
     .allusers
       for user in users 
+      
         .user
           ul(class="list-group")
             li(class="list-group-item") Name: #{user.firstname} #{user.lastname}
             li(class="list-group-item") Username: #{user.username}
-            li(class="list-group-item") 
-              a(href='mailto:#{user.email}') Email #{user.firstname}
-          
+            li(class="list-group-item")
+              ul(class="list-group")
+                li(class="list-group-item")
+                  form(class='brewnoteform' data-id=user.username)
+                    .brew    
+                      label(for='brew' class='sr-only')
+                      input(type='text' name='brew' id='brew' placeholder='Beer..')
+                    .brewnotes
+                      label(for='brewnotes' class='sr-only')
+                      textarea(rows='3' cols='20' name='brewnotes' id='brewnotes' placeholder='Tasting Notes..')
+                    .submit
+                      button(class='btn btn-primary post' id='subBrews') Post
+            li(class="list-group-item allposts")
+              for post in posts
+                if user.username == post.username
+                  ul(class="post" data-id=post.id)
+                    li(class='list-group-item beerpost' data-brew=post.brew) Name: #{post.brew}
+                    li(class='list-group-item brewnotespost') #{post.brewnotes}
+                    .button-group
+                      button(class='btn btn-primary delete' id='delPost') Delete Post
+                      button(class='btn btn-primary edit' id='editPost') Edit Post
+  script(id="NewBeerPost" type="text/x-handlebars-template")
+    ul(class="post" data-id='{{id}}')
+      li(class="list-group-item beerpost" data-brew='{{brew}}') Name: {{brew}}
+      li(class="list-group-item brewnotespost") {{brewnotes}}
+      .button-group
+        button(class='btn btn-primary delete' id='delPost') Delete Post
+        button(class='btn btn-primary edit' id='editPost') Edit Post
+      
